@@ -1,5 +1,5 @@
 <h1><%= @survey.name %></h1>
-
+<p>Enter a new question to add it to this survey.</p>
 <form action="/surveys/<%= @survey.id %>" method="post">
   <input type="text" name="prompt">
   <button type="submit">submit</button>

@@ -15,10 +15,14 @@ post '/' do
 end
 
 get '/surveys/:id' do
+  @questions = Question.all
   @survey = Survey.find(params.fetch("id").to_i)
   erb :survey
 end
 
 post '/surveys/:id' do
-
+  @survey = Survey.find(params.fetch("id").to_i)
+  question = Question.create({ prompt: params.fetch('prompt')})
+  @questions = Question.all
+  erb :survey
 end

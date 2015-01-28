@@ -5,10 +5,11 @@
   <button type="submit">submit</button>
 </form>
 
+
 <% if @questions.any? %>
   <ul class="list-unstyled">
     <% @questions.each do |question| %>
-      <li><%= question.prompt %></li>
+      <li><%= question.prompt %><a href="/surveys/:id/edit"> edit</a></li>
     <% end %>
   </ul>
 <% end %>

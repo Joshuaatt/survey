@@ -1,7 +1,7 @@
 require 'bundler/setup'
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
-
+also_reload 'lib/**/*.rb'
 
 get '/' do
   @surveys = Survey.all
@@ -26,4 +26,21 @@ post '/surveys/:id' do
   @survey.questions << question
   @questions = @survey.questions
   erb :survey
+end
+
+get '/surveys/:id/edit' do
+  @survey = Survey.find(params.fetch('id').to_i)
+  erb :survey_edit
+end
+
+patch '/surveys/:id/edit' do
+  survey = Survey.find(params.fetch('id').to_i)
+  survey.update({ name: params.fetch('name') })
+  redirect '/'
+end
+
+delete '/surveys/:id/edit' do
+  survey = Survey.find(params.fetch('id').to_i)
+  survey.delete
+  redirect '/'
 end

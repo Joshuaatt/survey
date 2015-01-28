@@ -1,0 +1,7 @@
+<h1><%= @survey.name %></h1>
+
+<form action="/survey/<%= @survey.id %>" method="post">
+  <input type="text" name="question">
+</form>
+
+<% if @questions.any? do 

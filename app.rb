@@ -44,3 +44,24 @@ delete '/surveys/:id/edit' do
   survey.delete
   redirect '/'
 end
+
+get '/questions/:id/edit/:survey_id' do
+  @survey_id = params.fetch('survey_id').to_i
+  @question = Question.find(params.fetch('id').to_i)
+  erb :question_edit
+end
+
+patch '/questions/:id/edit' do
+  survey_id = params.fetch('survey_id')
+  question = Question.find(params.fetch('id').to_i)
+  new_prompt = params.fetch('prompt')
+  question.update({ prompt: new_prompt})
+  redirect '/surveys/'.concat(survey_id)
+end
+
+delete '/questions/:id/edit' do
+  question = Question.find(params.fetch('id').to_i)
+  question.delete
+  survey_id = params.fetch('survey_id')
+  redirect '/surveys/'.concat(survey_id)
+end

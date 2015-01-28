@@ -1,0 +1,14 @@
+<h2>Edit or delete the question</h2>
+
+<form action="/questions/<%= @question.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input type="hidden" name="survey_id" value="<%= @survey_id %>">
+  <input type="text" name="prompt" value="<%= @question.prompt %>">
+  <button type="submit">Update</button>
+</form>
+
+<form action="/questions/<%= @question.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="hidden" name="survey_id" value="<%= @survey_id %>">
+  <button type="submit">Delete question</button>
+</form>

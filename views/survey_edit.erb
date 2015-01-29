@@ -9,3 +9,16 @@
   <input type="hidden" name="_method" value="delete">
   <button type="submit">Delete survey</button>
 </form>
+
+<% if @questions.any? %>
+  <p>Check the questions you want to remove from the survey:</p>
+  <form action="/remove_questions" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <ul class="list-unstyled">
+      <% @questions.each do |question| %>
+        <li><input type="checkbox" name="question_ids[]" value="<%= question.id %>"> <%= question.prompt %></li>
+      <% end %>
+    </ul>
+      <button type="submit">Remove</button>
+  </form>
+<% end %>

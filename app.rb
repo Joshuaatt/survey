@@ -30,6 +30,7 @@ end
 
 get '/surveys/:id/edit' do
   @survey = Survey.find(params.fetch('id').to_i)
+  @questions = @survey.questions
   erb :survey_edit
 end
 

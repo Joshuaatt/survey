@@ -1,0 +1,16 @@
+<h1><%= @question.prompt %></h1>
+
+<p>Add a response for your question</p>
+
+<form action="/questions/<%= @question.id %>" method="post">
+  <input type="text" name="answer" placeholder="Answer">
+  <button type="submit">Add</button>
+</form>
+
+<ul class="list-unstyled">
+  <% if @responses.any? %>
+    <% @responses.each do |response| %>
+      <li><%= response.answer %></li>
+    <% end %>
+  <% end %>
+</ul>

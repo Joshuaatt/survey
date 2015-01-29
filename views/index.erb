@@ -4,8 +4,19 @@
   Enter your survey title below:
 </p>
 
+<% if @survey.nil? %>
+<% else %>
+  <% if @survey.errors.full_messages.any? %>
+    <ul class="list-unstyled">
+      <% @survey.errors.full_messages.each do |message| %>
+        <li><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <form id="survey" action="/" method="post">
-  <input type="text" name="name">
+  <input type="text" name="name" placeholder="Survey name">
 
   <button type="submit">Create</button>
 
@@ -14,7 +25,7 @@
 <% if @surveys.any? %>
   <ul class="list-unstyled">
     <% @surveys.each do |survey| %>
-      <li><a href="/surveys/<%= survey.id %>"><%= survey.name %></a><a href="/surveys/<%= survey.id %>/edit"> edit</a></li>
+      <li><a href="/surveys/<%= survey.id %>"><%= survey.name %></a> <a href="/surveys/<%= survey.id %>/edit">edit</a></li>
     <% end %>
   </ul>
 <% end %>

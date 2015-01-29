@@ -9,7 +9,7 @@
 <% if @questions.any? %>
   <ul class="list-unstyled">
     <% @questions.each do |question| %>
-      <li><%= question.prompt %><a href="/questions/<%= question.id %>/edit/<%= @survey.id %>"> edit</a></li>
+      <li><a href="/questions/<%= question.id %>"><%= question.prompt %></a><a href="/questions/<%= question.id %>/edit/<%= @survey.id %>"> edit</a></li>
     <% end %>
   </ul>
 <% end %>

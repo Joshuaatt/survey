@@ -9,7 +9,7 @@ get '/' do
 end
 
 post '/' do
-  survey = Survey.create({ name: params.fetch('name') })
+  @survey = Survey.create({ name: params.fetch('name') })
   @surveys = Survey.all
   erb :index
 end
@@ -64,4 +64,18 @@ delete '/questions/:id/edit' do
   question.delete
   survey_id = params.fetch('survey_id')
   redirect '/surveys/'.concat(survey_id)
+end
+
+get '/questions/:id' do
+  @question = Question.find(params.fetch('id').to_i)
+  @responses = @question.responses
+  erb :question
+end
+
+post '/questions/:id' do
+  response = Response.create({ answer: params.fetch('answer') })
+  @question = Question.find(params.fetch('id').to_i)
+  @question.responses << response
+  @responses = @question.responses
+  erb :question
 end
